@@ -1,0 +1,65 @@
+balance=2525.25
+print("*********EUROCASH*********")
+PIN=int(input('Please enter your 4 Digit pin '))
+if PIN == (2525):
+  print('You entered you pin correctly\n')
+  print("""
+  1)        Balance
+  2)        Withdraw
+  3)        Deposit
+  4)        Finish operation
+  """)
+  Option=int(input("Enter Option: "))
+  if Option==1:
+    print("Balance  PLN ",balance)
+    print('Thank You for using EUROCASH')
+  
+  if Option==2:
+    print("Balance  PLN  ",balance)
+    Withdraw=float(input("Enter Withdraw amount PLN "))
+    if Withdraw>0:
+      if Withdraw<balance:
+        forewardbalance=(balance-Withdraw)
+        print('You have withdrawn ',Withdraw)
+        print("Foreward Balance  PLN ",forewardbalance)
+        receipt=input('Would you like to print a receipt?\n Please choose:\n y for Yes\n n for No\n')
+        
+        if receipt == 'y':
+          print('Printing Your receipt...\n')
+          print('PLEASE TAKE OUT YOUR CARD')
+          
+        elif receipt == 'n':
+          print('PLEASE TAKE OUT YOUR CARD')
+          print('Thank You for using EUROCASH')
+          
+      elif Withdraw>balance:
+        print("No funds in account")
+      else:
+        print("None withdraw made")
+    else: print('You cannot withdraw negative values')
+  
+  if Option==3:
+    print("Balance  PLN ",balance)
+    Deposit=float(input("Enter deposit amount PLN "))
+    if Deposit>0:
+        forewardbalance=(balance+Deposit)
+        print("Forewardbalance  PLN ",forewardbalance)
+        receipt=input('Would you like to print a receipt?\n Please choose:\n y for Yes\n n for No\n')
+        
+        if receipt == 'y':
+          print('Printing Your receipt...\n')
+          print('PLEASE TAKE OUT YOUR CARD')
+          
+        elif receipt == 'n':
+          print('PLEASE TAKE OUT YOUR CARD')
+          print('Thank You for using EUROCASH')
+          
+    else:
+        print("None deposit made\n PLEASE TAKE OUT YOUR CARD")
+  
+  if Option==4:
+    print('Thank You for using EUROCASH\n')
+    print("PLEASE DO NOT FORGET YOUR CARD")
+    exit()
+
+else: print('ERROR \n Incorrect PIN number. \n \n Please try again')
