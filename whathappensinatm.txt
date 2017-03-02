@@ -1,0 +1,15 @@
+1. Insert a card 
+2. ATM identifies user & rights 
+3. ATM represents of possible transactions 
+4. Select "cash payment" 
+5. Choose amount of money
+6. Confirm 
+7. ATM checks if amount is available 
+8. Enter PIN 
+9. Confirm 
+10. ATM checks if PIN is correct 
+11. ATM selects appropriate notes 
+12. ATM provides money
+13. Take out money
+14. ATM gives back card
+15. ATM prints receipt
