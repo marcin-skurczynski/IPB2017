@@ -12,4 +12,4 @@ while amount > balance:
 	amount = float(input("How much money would you like to withdraw? "))
 
 balance -= amount
-print ("You have successfully withdrawn", amount, "zł. You current balance is", balance, "zł")
+print ("You have successfully withdrawn", amount, "zł. Your current balance is", round(balance, 2), "zł")
