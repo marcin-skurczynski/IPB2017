@@ -1,0 +1,16 @@
+a = input('PIN Code?')
+x = input('Savings?')
+t = 0
+b = input('Welcome! Please enter your PIN code.')
+while a != b:
+  t +=1
+  print'You have', 3-t, 'attempt(s) left.'
+  b = input('Wrong PIN code. Please enter again your PIN code.')
+  if t == 3:
+    print('You used your 3 attempts, we blocked your card.')  
+    quit()
+y = input('How much do you want to withdraw?')
+while (x-y) < 0:
+  y = input('Withdrawal denied. Please enter a lower value.')
+  if (x-y) >=0: 
+    print'Please wait, we are withdrawing', y, 'euro(s) for you. Current balance is now', x-y, 'euro(s). Thank you for using our services, goodbye!'
