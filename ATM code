@@ -1,0 +1,20 @@
+print('Welcome to Millenium Bank ATM')
+chances = 3
+balance = 1000.00
+while chances >= 0:
+    pin = input('Please Enter Your Pin: ')
+    if pin != ('1234'):
+        print('Incorrect pin')
+        chances = chances - 1
+        if chances == 0:
+            print('No more tries')
+            break
+    else:
+      amount = float (input ('Enter the desired amount of withdrawal'))
+      while amount > balance: 
+        print ('Invalid amount')
+        amount = float (input ('Enter the correct amount of withdrawal'))
+      if amount <= balance:
+        print ('Take your receipt')
+        break
+          
