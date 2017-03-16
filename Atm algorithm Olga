@@ -1,0 +1,27 @@
+print ('Welcome!')
+PIN=int(input('Please enter your 4 Digit pin '))
+if PIN == (4589):
+ print ('You entered you pin correctly')
+ print ('1 = Withdraw')
+ print ('2 = Deposit')
+ print ('3 = Balance enquiry')
+ print ('4 = Return card')
+Option=int(input("Please select your operation: "))
+if Option == 1:
+  withdrawvalue = input('How much do you want to withdraw?')
+  print ('Withdrawing...')
+  print (withdrawvalue)
+  print ('Thank you for coming. Goodbye!')
+if Option == 2:
+  depositvalue =input('How much do you want to deposit?')
+  print ('Please insert your bank notes')
+  print ('You made a deposit of...')
+  print (depositvalue)
+  print('Thank you for coming. Goodbye!')
+if Option == 3:
+  print('We are printing the balance of your account')
+  print('Goodbye!')
+if Option == 4:
+  print ('Thank you for comming! Take your card! Goodbye!')
+  
+else: print ('ERROR! PIN number is incorrect. Please try again!')

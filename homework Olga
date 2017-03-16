@@ -1,0 +1,17 @@
+Insert card
+Choose langauge (Polish/English/German) 
+Enter your PIN code
+Press 'Accept' button
+ATM checks your card and PIN
+Choose option 'Cash withdrawal'  
+Choose sum '50 zlotych' 
+Press 'Accept' button
+Print receipt (Choose 'Yes/No')
+ATM checks if you have money you requested on your account
+ATM gives out your card
+Take card 
+ATM gives out money
+Take money
+ATM gives out receipt (if requested)
+Take receipt (If requested) 
+Thank you! :) 
