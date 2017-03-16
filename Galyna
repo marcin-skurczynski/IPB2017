@@ -1,0 +1,22 @@
+balance=200.0
+print(" > > > >  PrivatBank  < < < <  ")
+print ('Welcome!')
+PINCODE = int(input('ENTER your PINCODE: '))
+if PINCODE == (1234):
+  print('Your PINCODE Is Correct\n')
+  print("""
+  1)        Check your account Balance
+  2)        Withdraw Money
+  3)        Cancel
+  """)
+  Option=int(input("Enter Option: "))
+  if Option==1:
+    print('Balance PLN', balance)
+  if Option==2:
+   withdrawvalue=input("How much do you want to withdraw money?")
+   print('Withdrawing...')
+   print (withdrawvalue)
+   print ("Thank you for using PrivatBank" )
+  if Option==3:
+    print('Thank You for using PrivatBank\n')
+    print("PLEASE DO NOT FORGET YOUR CARD")
