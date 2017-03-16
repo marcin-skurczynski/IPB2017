@@ -1,0 +1,19 @@
+print ('Citibank')
+print ('Welcome')
+pincode = input('Please enter your PIN code')
+print("""
+  1)        Withdraw
+  2)        Deposit
+  3)        Finish operation
+      """)
+Option=int(input("Enter Option: "))
+if Option==1:
+    print("""
+  1)        50
+  2)        100
+  3)        500
+  4)        1000
+      """)
+    Option=int(input("Enter Withdraw amount PLN: "))
+    if Option==100:
+      print('Thank you for using Citibank')
