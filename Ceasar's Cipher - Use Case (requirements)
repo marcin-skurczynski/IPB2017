@@ -1,0 +1,24 @@
+I would like to enter few sentences at the time (one-by-one)
+I would like to cipher and decipher
+I would like to choose the shift (for ciphering and deciphering)
+Software should distinguish capital leters
+Software should not crash on z/Z letters when coding
+Software should deal with blank spaces and very long sentences.
+
+What if shift is: 20? -45? Will it work?
+What happens with: „Z”, „  „, „ , ”… other marks (interpunction)?
+
+Methods – how to use parts of the code:
+def code(given_word, shift):
+  do something
+
+def decode(given_word, shift):
+  code(given_word, -shift)
+
+Menu loop
+  if choice==1:
+  	code
+  if choice==2:
+	  decode
+  if choice==3:
+ 	  exit
