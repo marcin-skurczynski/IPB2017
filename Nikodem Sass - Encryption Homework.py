@@ -1,28 +1,44 @@
 import string
 alfa = string.ascii_letters
-print ('Choose to encrypt or decrypt Your message: \n')
-print ('1 - Encryption \n')
-print ('2 - Decryption \n')
-choice = input('Your Choice ')
+choice = 0
+while choice != '3':
+  print ('\n --- --- --- \n\nChoose to encrypt or decrypt Your message: \n')
+  print ('1 - Encryption \n')
+  print ('2 - Decryption \n')
+  print ('3 - Exit \n')
+  choice = input('Your Choice ')
 
-if choice == '1':
-  name = input('What is Your name? \n')
-  shift = int(input('Input desired shift \n'))
-  print('Length of the string is', len(name))
+  if choice == '1':
+    name = input('What is Your message? \n')
+    shift = int(input('Input desired shift \n'))
+    print('\nLength of the string is', len(name),'\n')
 
-  for i in range (len(name)):
-    counter = 0
-    while alfa[counter] != name[i]:
-      counter = counter + 1
-    print(alfa[counter+shift], end='')
+    for i in range (len(name)):
+      counter = 0
+      if name[i].isalpha() :
+        while alfa[counter] != name[i]:
+          counter = counter + 1
+        print(alfa[(counter+shift)%52], end='')
+      else:
+        print(name[i], end='')
+        counter = counter + 1
+    print('\nThis is Your encrypted message\n')
+      
+  if choice == '2':
+    name = input('What is Your message? \n')
+    shift = int(input('Input desired shift \n'))
+    print('\nLength of the string is', len(name),'\n')
 
-if choice == '2':
-  name = input('What is Your name? \n')
-  shift = int(input('Input desired shift \n'))
-  print('Length of the string is', len(name))
+    for i in range (len(name)):
+      counter = 0
+      if name[i].isalpha():
+        while alfa[counter] != name[i]:
+          counter = counter + 1
+        print(alfa[(counter-shift)%52], end='')
+      else:
+        print (name[i], end='')
+        counter = counter + 1
+    print('\nThis is Your decrypted message\n')
 
-  for i in range (len(name)):
-    counter = 0
-    while alfa[counter] != name[i]:
-      counter = counter + 1
-    print(alfa[counter-shift], end='')
+print ('Thank You for using my program ! :)')
+exit()
