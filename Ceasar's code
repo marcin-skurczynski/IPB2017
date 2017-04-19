@@ -1,0 +1,13 @@
+import string
+x = input('What is your name?')
+alfa = string.ascii_letters
+shift = int (input ('Enter shift:'))
+output = ''
+
+
+for i in range (len(x)):
+  counter = 0
+  while alfa[counter] != x[i]:
+    counter = counter+1
+  output = output+alfa[counter+shift]  
+print (output)
