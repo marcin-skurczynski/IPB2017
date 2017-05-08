@@ -21,3 +21,9 @@ SELECT A.Country, SUM(C.Quantity) AS Sum_of_Quantity
 FROM [Customers] A, [Orders] B, [OrderDetails] C
 WHERE (A.CustomerID = B.CustomerID) AND (B.OrderID = C.OrderID)
 GROUP BY A.Country;
+
+OR JUST TO SHOW QUANTITY FOR GERMANY
+
+SELECT A.Country, SUM(C.Quantity) AS Sum_of_Quantity
+FROM [Customers] A, [Orders] B, [OrderDetails] C
+WHERE (A.CustomerID = B.CustomerID) AND (B.OrderID = C.OrderID) AND (A.Country = 'Germany');
