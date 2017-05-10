@@ -1,0 +1,19 @@
+1. SELECT * FROM [Customers]
+2. SELECT CustomerName, Country
+   FROM Customers
+   WHERE Country=Germany
+3. SELECT OrderDetails.OrderID, SUM(OrderDetails.Quantity) 
+   FROM OrderDetails 
+   Group BY OrderDetails.OrderID 
+   Having SUM(OrderDetails.Quantity) > 10
+4. SELECT Customers.CustomerName, Sum(OrderDetails.Quantity) AS QuantityPerCustomer 
+   FROM OrderDetails 
+   JOIN Orders ON Orders.OrderID = OrderDetails.OrderID 
+   JOIN Customers ON Customers.CustomerID = Orders.CustomerID 
+   GROUP BY Customers.CustomerName
+5.SELECT Customers.Country, Sum(OrderDetails.Quantity) AS QuantityPerCountry 
+  FROM OrderDetails 
+  JOIN Orders ON Orders.OrderID = OrderDetails.OrderID 
+  JOIN Customers ON Customers.CustomerID = Orders.CustomerID 
+  Where Customers.Country = 'Germany' 
+  GROUP BY Customers.Country;   
