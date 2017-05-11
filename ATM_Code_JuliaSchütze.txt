@@ -1,0 +1,12 @@
+cardPin = 9876
+balance = 10000.00
+pin = int(input("Please enter your PIN: "))
+while pin != cardPin:
+	print ("PIN is not correct. Please try again.")
+	pin = int(input("Please enter your PIN: "))
+amount = float(input("Amount of money to withdraw: "))
+while amount > balance:
+	print ("Amount of money is higher than balance. Please try again.")
+	amount = float(input("Amount of money to withdraw: "))
+balance -= amount
+print ("Withdrawal was successful. You new balance is", balance)

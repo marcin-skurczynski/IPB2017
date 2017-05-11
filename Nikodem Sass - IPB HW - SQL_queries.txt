@@ -1,0 +1,48 @@
+----------------------------------------
+IPB HOMEWORK - SQL QUERRIES
+----------------------------------------
+
+1. Show all elements in the table
+
+	SELECT * FROM [Customers];
+
+----------------------------------------
+----------------------------------------
+
+2. Select people living in Germany
+
+	SELECT * FROM [Customers]
+	WHERE Country = 'Germany';
+
+----------------------------------------
+----------------------------------------
+
+3. Show orders with quantity greater than 10
+
+	SELECT Ord.*, Ord_Det.Quantity FROM [Orders] Ord, [OrderDetails] Ord_Det
+	WHERE Ord.OrderID = Ord_Det.OrderID AND Ord_Det.Quantity > 10;
+
+----------------------------------------
+----------------------------------------
+
+4. Connect customers & orders. Show quantity per customer
+
+	SELECT Cust.CustomerID, Cust.CustomerName, SUM(Ord_Det.Quantity) AS Summed_Quantity
+	FROM [Customers] Cust, [Orders] Ord, [OrderDetails] Ord_Det
+	WHERE (Cust.CustomerID = Ord.CustomerID) AND (Ord.OrderID = Ord_Det.OrderID)
+	GROUP BY Cust.CustomerID;
+
+----------------------------------------
+----------------------------------------
+
+5. Group orders by country. How many items went to Germany?
+
+	SELECT Cust.Country, SUM(Ord_Det.Quantity) AS Summed_Quantity
+	FROM [Customers] Cust, [Orders] Ord, [OrderDetails] Ord_Det
+	WHERE (Cust.CustomerID = Ord.CustomerID) AND (Ord.OrderID = Ord_Det.OrderID)
+	GROUP BY Cust.Country;
+
+OR JUST TO SHOW QUANTITY FOR GERMANY
+	SELECT Cust.Country, SUM(Ord_Det.Quantity) AS Summed_Quantity
+	FROM [Customers] Cust, [Orders] Ord, [OrderDetails] Ord_Det
+	WHERE (Cust.CustomerID = Ord.CustomerID) AND (Ord.OrderID = Ord_Det.OrderID) AND (Cust.Country = 'Germany');

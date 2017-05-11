@@ -1,0 +1,18 @@
+1. SELECT * FROM Customers
+
+2. SELECT * FROM Customers WHERE Country LIKE 'Germany'
+
+3. SELECT * FROM OrderDetails WHERE Quantity > 10
+
+4. SELECT Customers.CustomerID, Customers.CustomerName, Orders.CustomerID, Orders.OrderID, OrderDetails.Quantity, 
+   SUM (OrderDetails.Quantity)
+   FROM Customers, Orders, OrderDetails
+   WHERE Customers.CustomerID LIKE Orders.CustomerID AND Orders.OrderID LIKE OrderDetails.OrderID
+   GROUP BY Customers.CustomerName
+   
+5. SELECT Customers.Country, 
+   SUM (OrderDetails.Quantity)
+   FROM Customers, Orders, OrderDetails 
+   WHERE (Customers.CustomerID LIKE Orders.CustomerID) AND (Orders.OrderID LIKE OrderDetails.OrderID) AND (Customers.Country LIKE 'Germany')
+   
+-> 2015 items went to Germany

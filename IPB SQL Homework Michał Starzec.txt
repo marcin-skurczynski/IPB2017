@@ -1,0 +1,29 @@
+1. 
+SELECT * FROM [Customers];
+
+2. 
+SELECT * FROM [Customers]
+WHERE Country = 'Germany';
+
+3.
+SELECT A.*, B.Quantity
+FROM [Orders] A, [OrderDetails] B
+WHERE (A.OrderID = B.OrderID) AND (B.Quantity) > 10;
+
+4.
+SELECT A.CustomerName, B.CustomerID, SUM(C.Quantity) AS Sum_of_Quantity
+FROM [Customers] A, [Orders] B, [OrderDetails] C
+WHERE (A.CustomerID = B.CustomerID) AND (B.OrderID = C.OrderID)
+GROUP BY A.CustomerName;
+
+5.
+SELECT A.Country, SUM(C.Quantity) AS Sum_of_Quantity
+FROM [Customers] A, [Orders] B, [OrderDetails] C
+WHERE (A.CustomerID = B.CustomerID) AND (B.OrderID = C.OrderID)
+GROUP BY A.Country;
+
+OR JUST TO SHOW QUANTITY FOR GERMANY
+
+SELECT A.Country, SUM(C.Quantity) AS Sum_of_Quantity
+FROM [Customers] A, [Orders] B, [OrderDetails] C
+WHERE (A.CustomerID = B.CustomerID) AND (B.OrderID = C.OrderID) AND (A.Country = 'Germany');

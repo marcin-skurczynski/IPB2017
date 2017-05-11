@@ -1,0 +1,23 @@
+homework 
+
+
+1. SELECT * FROM [Employees]
+
+
+2. SELECT * 
+FROM [Customers] 
+WHERE COUNTRY LIKE 'GERMANY'
+
+3. SELECT OrderID
+FROM [OrderDetails]
+WHERE (Quantity) > 10 
+
+4. SELECT A.CustomerName, A.CustomerID, B.OrderID, B.CustomerID, C.OrderID, C.Quantity
+FROM [Customers] A, [Orders] B, [OrderDetails] C
+WHERE (C.Quantity > 10)
+GROUP BY A.CustomerName
+
+5. SELECT A.CustomerName, A.CustomerID, A.Country, B.OrderID, B.CustomerID, C.OrderID, C.Quantity
+FROM [Customers] A, [Orders] B, [OrderDetails] C
+WHERE (Country ='Germany')
+GROUP BY A.CustomerName
