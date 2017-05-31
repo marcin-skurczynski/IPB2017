@@ -4,17 +4,18 @@ balance = 826.20
 from Tkinter import *
 import tkMessageBox
 import tkFont
+import os
 
 class Controller:
 
-	width  = 300
-	height = 500
+	width  = 400
+	height = 600
 
 	current_frame = 'password'
 
 	pin = '2408'
 
-	filename = 'atm.py'
+	filename = os.path.basename(__file__)
 
 	def __init__(self, balance):
 
