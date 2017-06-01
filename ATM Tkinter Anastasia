@@ -1,0 +1,300 @@
+balance = 826.20
+# END_BALANCE
+
+from Tkinter import *
+import tkMessageBox
+import tkFont
+import os
+
+class Controller:
+
+	width  = 400
+	height = 600
+
+	current_frame = 'password'
+
+	pin = '2408'
+
+	filename = os.path.basename(__file__)
+
+	def __init__(self, balance):
+
+		self.balance = balance
+		
+		self.root = Tk()
+		self.root.wm_title("ATM")
+
+		self.root.geometry('%sx%s' % (self.width, self.height))
+		self.root.resizable(0, 0)
+
+		self.root.bind('<Return>', self._return)
+
+	def create_button(self, frame, text, command=False):
+
+		button = Label(frame,
+			text=text,
+			font='Arial, 14',
+			justify='center',
+			pady=5,
+			relief='raised',
+			borderwidth=1)
+
+		if command != False:
+			button.bind('<ButtonRelease-1>', command)
+
+		return button
+
+	def go(self, href):
+
+		href.frame.tkraise()
+		self.current_frame = href.name
+
+	def _return(self, event):
+
+		if self.current_frame == 'password':
+			password.check_pass()
+		elif self.current_frame == 'topup':
+			topup.top_up(event)
+		elif self.current_frame == 'withdraw':
+			withdraw.withdraw(event)
+
+	def _float_filter(self, entry):
+
+		try:
+			f_entry = float(entry)
+		except:
+			return False
+
+		if round(f_entry, 2) == f_entry:
+			return True
+		else:
+			return False
+
+	def update_balance(self):
+
+		file = open(self.filename, 'r')
+		content = file.read()
+		file.close()
+
+		new_file = 'balance = %.2f\n' % self.balance
+		new_file += '# END_BALANCE'
+		new_file += content[content.index('# END_BALANCE')+len('# END_BALANCE'):]
+
+		file = open(self.filename, 'w')
+		file.write(new_file)
+		file.close()	
+
+class Password:
+
+	name = 'password'
+
+	def __init__(self):
+
+		self.frame = Frame(controller.root, width=controller.width, height=controller.height)
+
+		self.frame.grid(row = 1, column = 1, sticky = 'news')
+		self.frame.pack_propagate(False)
+
+		Frame(self.frame, height=50).pack()
+
+		Label(self.frame, text='Please enter your pin', font='Arial, 16').pack()
+
+		Frame(self.frame, height=20).pack()
+
+		self.entry = Entry(self.frame, width=10, show='*', justify='center')
+		self.entry.pack()
+
+		Frame(self.frame, height=50).pack()
+
+		self.submit_btn = controller.create_button(self.frame, 'Submit', self.check_pass)
+		self.submit_btn.configure(padx=8)
+		self.submit_btn.pack()
+
+	def check_pass(self, event=False):
+
+		if self.entry.get() == controller.pin:
+			controller.go(menu)
+		else:
+			tkMessageBox.showinfo("Error", "Pincode in incorrect")
+
+		self.entry.delete(0, 'end')
+		
+
+class Menu:
+
+	name = 'menu'
+
+	def __init__(self):
+
+		self.frame = Frame(controller.root, width=controller.width, height=controller.height)
+
+		self.frame.grid(row = 1, column = 1, sticky = 'news')
+		self.frame.pack_propagate(False)
+
+		Frame(self.frame, height=50).pack()
+
+		self.balance_text = StringVar()
+		self._update_balance()
+
+		Label(self.frame, text='Your current balance is', font='Arial, 16').pack()
+
+		Frame(self.frame, height=15).pack()
+
+		Label(self.frame, textvariable=self.balance_text, font='Arial, 20').pack()
+
+		Frame(self.frame, height=50).pack()
+
+		self.topup_link = controller.create_button(self.frame, 'Topup', command=self._go_topup)
+		self.topup_link.pack(fill='x')
+
+		Frame(self.frame, height=10).pack()
+
+		self.withdraw_link = controller.create_button(self.frame, 'Withdraw', command=self._go_withdraw)
+		self.withdraw_link.pack(fill='x')
+
+		Frame(self.frame, height=120).pack()
+
+		self.quit_button = Label(self.frame,
+			text='Quit',
+			fg='blue',
+			font='Arial, 14')
+		self.quit_button.pack()
+		self.quit_button.bind('<Button-1>', self._quit)
+
+	def _update_balance(self):
+		self.balance_text.set('%.2f PLN' % controller.balance)
+		controller.update_balance()
+
+	def _go_topup(self, event):
+		controller.go(topup)
+
+	def _go_withdraw(self, event):
+		controller.go(withdraw)
+
+	def _quit(self, event):
+		controller.go(password)
+
+class Topup:
+
+	name = 'topup'
+
+	def __init__(self):
+
+		self.frame = Frame(controller.root, width=controller.width, height=controller.height)
+
+		self.frame.grid(row = 1, column = 1, sticky = 'news')
+		self.frame.pack_propagate(False)
+
+		Frame(self.frame, height=50).pack()
+
+		Label(self.frame, text='Enter the sum you would like to top up', font='Arial, 16').pack()
+
+		Frame(self.frame, height=20).pack()
+
+		self.entry = Entry(self.frame, width=10, justify='center')
+		self.entry.pack()
+
+		Frame(self.frame, height=50).pack()
+
+		self.submit_btn = controller.create_button(self.frame, 'Top up', command=self.top_up)
+		self.submit_btn.configure(padx=8)
+		self.submit_btn.pack()
+
+		Frame(self.frame, height=156).pack()
+
+		self.back_button = Label(self.frame,
+			text='Back',
+			fg='blue',
+			font='Arial, 14')
+		self.back_button.pack()
+		self.back_button.bind('<Button-1>', self._back)
+
+	def top_up(self, event):
+		entry = self.entry.get()
+
+		if controller._float_filter(entry):
+			controller.balance += float(entry)
+			menu._update_balance()
+			controller.go(menu)
+		else:
+			self._alert()
+		
+		self.entry.delete(0, 'end')
+
+	def _alert(self):
+		tkMessageBox.showinfo("Format error", "The sum must be a float number with max 2 numbers after decimal point.")
+
+	def _back(self, event):
+		self.entry.delete(0, 'end')
+		controller.go(menu)
+
+class Withdraw:
+
+	name = 'withdraw'
+
+	def __init__(self):
+
+		self.frame = Frame(controller.root, width=controller.width, height=controller.height)
+
+		self.frame.grid(row = 1, column = 1, sticky = 'news')
+		self.frame.pack_propagate(False)
+
+		Frame(self.frame, height=50).pack()
+
+		Label(self.frame, text='Enter the sum you would like to withdraw', font='Arial, 16').pack()
+
+		Frame(self.frame, height=20).pack()
+
+		self.entry = Entry(self.frame, width=10, justify='center')
+		self.entry.pack()
+
+		Frame(self.frame, height=50).pack()
+
+		self.submit_btn = controller.create_button(self.frame, 'Withdraw', command=self.withdraw)
+		self.submit_btn.configure(padx=8)
+		self.submit_btn.pack()
+
+		Frame(self.frame, height=156).pack()
+
+		self.back_button = Label(self.frame,
+			text='Back',
+			fg='blue',
+			font='Arial, 14')
+		self.back_button.pack()
+		self.back_button.bind('<Button-1>', self._back)
+
+	def withdraw(self, event):
+		entry = self.entry.get()
+
+		if controller._float_filter(entry):
+			if float(entry) <= controller.balance:
+				self.entry.delete(0, 'end')
+				controller.balance -= float(entry)
+				menu._update_balance()
+				controller.go(menu)
+			else:
+				self._funds_alert()
+		else:
+			self._format_alert()
+			self.entry.delete(0, 'end')
+
+	def _format_alert(self):
+		tkMessageBox.showinfo("Format error", "The sum must be a float number with max 2 numbers after decimal point.")
+
+	def _funds_alert(self):
+		tkMessageBox.showinfo("Funds error", "You don't have enough funds to withdraw.")
+
+	def _back(self, event):
+		self.entry.delete(0, 'end')
+		controller.go(menu)
+
+
+controller = Controller(balance)
+
+password = Password()
+menu = Menu()
+topup = Topup()
+withdraw = Withdraw()
+
+controller.go(password)
+controller.root.mainloop()
