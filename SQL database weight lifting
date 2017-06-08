@@ -1,0 +1,24 @@
+#CREATE TABLE for weightlifting stats
+CREATE TABLE weightlifting_stats(id INTEGER, name TEXT, kilograms INTEGER);
+INSERT INTO weightlifiting_stats(id, name, kilograms) VALUES (1, 'DB Incline Press', 36);
+
+INSERT INTO weightlifiting_stats(id, name, kilograms)
+VALUES (2, 'Arnold Press', 26);
+
+INSERT INTO weightlifiting_stats(id, name, kilograms)
+VALUES (3, 'Squat', 200);
+
+INSERT INTO weightlifting_stats (id, name, kilograms)
+VALUES (4, 'Deadlift', 140);
+SELECT * from weightlifting_stats; 
+
+ALTER TABLE weightlifting_stats ADD COLUMN Goal_Weight TEXT;
+
+INSERT INTO weightlifting_stats (id, name, kilograms)
+VALUES (5, 'Goal_Weight', 0kgs);
+SELECT * FROM weightlifting_stats;
+
+UPDATE weightlifting_stats
+SET Goal_Weight = '77.1kgs' 
+WHERE id = 5;
+SELECT * FROM weightlifiting_stats;
